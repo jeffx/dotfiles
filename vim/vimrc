@@ -1,0 +1,42 @@
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+filetype indent plugin on
+syntax on
+set expandtab
+set autoindent
+set shiftround
+set hlsearch
+set incsearch
+set ruler
+set modeline
+set background=dark
+set textwidth=78
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4 
+set wm=2
+
+"
+
+"syntastic settings
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"-end syntastic settings
+"syntastic for python
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
+"-end syntastic for python
+
+"set number
+" autocmd BufWritePost *.py call Pyflakes()
+" autocmd BufWritePost *.py call Pep8()
+
