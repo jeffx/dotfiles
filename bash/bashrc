@@ -1,0 +1,25 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+unset SSH_ASKPASS
+case $- in 
+	*i* )
+        INTERACTIVE=1
+        ;;
+esac
+if [ "${INTERACTIVE:-0}" -ne 1 ] ; then
+    return
+fi
+SUBLIME_VERSION_PREF=3
+source /etc/environment
+[[ -e ${HOME}/projects/dotfiles/bash/functions ]] && . ${HOME}/projects/dotfiles/bash/functions 
+[[ -e ${HOME}/projects/dotfiles/bash/aliases ]] && . ${HOME}/projects/dotfiles/bash/aliases
+export http_proxy
+export https_proxy
+PATH=${PATH}:${HOME}/bin:${HOME}/bin/sublime/${SUBLIME_VERSION_PREF}:/home/jxt131/.chefdk/gem/ruby/2.1.0/bin:foo
+
+
+# User specific aliases and functions

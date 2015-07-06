@@ -1,0 +1,15 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+
+##################################################
+# BEGIN : dc-chef-workstation 001
+# Source .ssh-agent if present.
+# This supports the launch-ssh-agent script.
+[ -f /home/jxt131/.ssh-agent ] && source /home/jxt131/.ssh-agent
+# END   : dc-chef-workstation 001
+##################################################

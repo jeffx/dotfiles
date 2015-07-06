@@ -1,0 +1,7 @@
+delete_host_from_known_hosts() {
+    if [[ -z ${1} ]] ; then 
+        echo "need line to delete"
+    else
+        sed -i "${1}d" ${HOME}/.ssh/known_hosts
+    fi
+}
