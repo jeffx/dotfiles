@@ -17,7 +17,6 @@ set softtabstop=4
 set shiftwidth=4 
 set wm=2
 
-"
 
 "syntastic settings
 "set statusline+=%#warningmsg#
