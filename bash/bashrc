@@ -1,11 +1,12 @@
 # .bashrc
-
+[ -f ~/.local_environment ] || ~/.local_environment
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
+env_type=$(uname)
 unset SSH_ASKPASS
-case $- in 
+case $- in
 	*i* )
         INTERACTIVE=1
         ;;
@@ -14,12 +15,28 @@ if [ "${INTERACTIVE:-0}" -ne 1 ] ; then
     return
 fi
 SUBLIME_VERSION_PREF=3
-source /etc/environment
-[[ -e ${HOME}/projects/dotfiles/bash/functions ]] && . ${HOME}/projects/dotfiles/bash/functions 
+source ~/projects/dotfiles/environment/proxy.inc
 [[ -e ${HOME}/projects/dotfiles/bash/aliases ]] && . ${HOME}/projects/dotfiles/bash/aliases
-export http_proxy
-export https_proxy
-PATH=${PATH}:${HOME}/bin:${HOME}/bin/sublime/${SUBLIME_VERSION_PREF}:/home/jxt131/.chefdk/gem/ruby/2.1.0/bin:foo
-
-
-# User specific aliases and functions
+TZ="/usr/share/zoneinfo/EST5EDT"
+if [ "${env_type}" == "Darwin" ] ; then
+    PATH=${HOME}/homebrew/bin:${HOME}/local/bin:${HOME}/bin:/opt/chefdk/embedded/bin:${HOME}/.chefdk/gem/ruby/2.1.0/bin:${PATH}
+    export CLICOLOR=1
+    #export LSCOLORS=
+else
+    PATH=${PATH}:${HOME}/local/bin:${HOME}/bin:${HOME}/bin/sublime/${SUBLIME_VERSION_PREF}:/home/jxt131/.chefdk/gem/ruby/2.1.0/bin
+fi
+if [ -e ${HOME}/homebrew/etc/bash_completion.d/git-prompt.sh ] ; then
+	. ${HOME}/homebrew/etc/bash_completion.d/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=true
+    PS1='[\u@clam \W$(__git_ps1)]\$ '
+fi
+LD_LIBRARY_PATH=${HOME}/local/lib:${LD_LIBRARY_PATH}
+export PATH
+export LD_LIBRARY_PATH
+VIRTUALENVWRAPPER_PYTHON=~/local/bin/python3.4
+export WORKON_HOME=~/venv
+#PS1="[\u@\h \W]\$ "
+export PS1
+unset env_type
+KITCHEN_LOCAL_YAML=~/projects/dotfiles/environment/kitchen/kitchen.local.yml
+export KITCHEN_LOCAL_YAML
