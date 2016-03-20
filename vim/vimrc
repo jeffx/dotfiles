@@ -30,13 +30,47 @@ let python_highlight_all=1
 syntax enable
 set encoding=utf-8
 set number
+set numberwidth=5
 set tabstop=4
 set autoindent
 set expandtab
 set shiftwidth=4
 set cursorline
 set showmatch
+set showcmd
 set ruler
+set laststatus=2
+set autoread
+set autowrite
+set ignorecase
+set smartcase
+set hlsearch
+nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
+nnoremap j gj
+nnoremap k gk
+nnoremap <tab> %
+vnoremap <tab> %
+set incsearch
+set showmatch
+set list listchars=tab:»·,trail:.,nbsp:.
+set diffopt+=vertical
+" relative numbering
+set rnu
+function! ToggleNumbersOn()
+    set nu!
+    set rnu
+endfunction
+function! ToggleRelativeOn()
+    set rnu!
+    set nu
+endfunction
+autocmd FocusLost * call ToggleRelativeOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleRelativeOn()
+autocmd InsertLeave * call ToggleRelativeOn()
+
+
+
 "set background=dark
 colorscheme zenburn
 call togglebg#map("<F5>")
@@ -48,8 +82,9 @@ map <C-F> :NERDTreeToggle<CR>
 let g:SimpylFold_docstring_preview=1
 let NERDTreeIgnore=['\.pyc$', '\~$']
 au BufNewFile,BufRead *.py 
-    \ setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab 
-    \ autoindent fileformat=unix
+    \ setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79
+    \ formatoptions=qnr1 wrapmargin=0 colorcolumn=+1
+    \ expandtab autoindent fileformat=unix
 au BufNewFile,BufRead *.py,*.pyw,*.c.*.h match BadWhitespace /\s\+$/
 au BufNewFile,BufRead *.js,*.html,*.css
     \ set tabstop=2 softtabstop=2 shiftwidth=2
