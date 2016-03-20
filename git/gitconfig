@@ -1,9 +1,9 @@
 [user]
-	name = Jeff Tillotson
-	email = jpt@jeffx.com
+    name = Jeff Tillotson
+    email = jpt@jeffx.com
 [core]
-	excludesfile = ~/.gitignore
-	editor = /usr/bin/vim
+    excludesfile = ~/.gitignore
+    editor = /usr/bin/vim
 [color]
     branch = auto
     diff = auto
