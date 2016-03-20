@@ -52,6 +52,11 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <tab> %
 vnoremap <tab> %
+nnoremap v <C-V>
+nnoremap <C-V> v
+vnoremap v <C-V>
+vnoremap <C-V> v
+
 set incsearch
 set showmatch
 set list listchars=tab:»·,trail:.,nbsp:.
@@ -97,3 +102,43 @@ au BufNewFile,BufRead *.sh,*.bash,*.ksh
 au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 au StdinReadPre * let s:std_in=1
 au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"===[ Make the 81st column stand out ] ===
+" for the entire 81st column (full-screen)
+"- highlight ColorColumn ctermbg=magenta
+"- set colorcolumn=81
+" OR just the 81st column
+highlight ColorColumn ctermbg=magenta
+highlight WhiteOnRed ctermbg=red ctermfg=white
+call matchadd('ColorColumn', '\%81v', 100)
+"=====[ Highlight matches when jumping to next ]=============
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
+function! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+"function! HLNext (blinktime)
+"    highlight RedOnRed ctermfg=red ctermbg=red
+"    let [bufnum, lnum, col, off] = getpos('.')
+"    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"    echo matchlen
+"    let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
+"            \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
+"            \ . '\|'
+"            \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
+"            \ . '\|'
+"            \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
+"    let ring = matchadd('RedOnRed', ring_pat, 101)
+"    redraw
+"    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"    call matchdelete(ring)
+"    redraw
+"endfunction
+
