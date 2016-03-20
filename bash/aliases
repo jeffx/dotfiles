@@ -1,3 +1,4 @@
 alias envcig="source ${HOME}/env/cigdev-admin-openrc.sh"
 alias envcia="source ${HOME}/env/ciadev-admin-openrc.sh"
 alias bh=delete_host_from_known_hosts
+alias ls="ls --color=auto -F"
