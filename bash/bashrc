@@ -1,13 +1,16 @@
 # .bashrc
+force_color_prompt=yes
 [ -f ~/.local_environment ] && ~/.local_environment
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
+elif [ -f /etc/bash.bashrc ] ; then
+    . /etc/bash.bashrc 
 fi
 env_type=$(uname)
 unset SSH_ASKPASS
 case $- in
-	*i* )
+    *i* )
         INTERACTIVE=1
         ;;
 esac
@@ -42,3 +45,4 @@ export PS1
 unset env_type
 KITCHEN_LOCAL_YAML=~/projects/dotfiles/environment/kitchen/kitchen.local.yml
 export KITCHEN_LOCAL_YAML
+export TERM=xterm-256color

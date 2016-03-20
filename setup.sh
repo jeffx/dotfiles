@@ -15,7 +15,6 @@ for file in ${dot_file_list} ; do
     bn=$(basename ${file})
     df="${HOME}/.${bn}"
     sf="${source_dir}/${file}"
-    echo "bf=${df}"
     if [ -h ${df} ] ; then
         rm -f ${df}
     elif [ -f ${df} ] ; then
