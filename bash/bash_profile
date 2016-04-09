@@ -6,10 +6,7 @@ if [ -f ~/.bashrc ]; then
 fi
 
 
-##################################################
-# BEGIN : dc-chef-workstation 001
-# Source .ssh-agent if present.
-# This supports the launch-ssh-agent script.
-[ -f /home/jxt131/.ssh-agent ] && source /home/jxt131/.ssh-agent
-# END   : dc-chef-workstation 001
-##################################################
+# Setting PATH for Python 3.5
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+export PATH

@@ -1,6 +1,6 @@
 # .bashrc
 force_color_prompt=yes
-[ -f ~/.local_environment ] && ~/.local_environment
+[ -f ~/.local_environment ] && . ~/.local_environment
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
@@ -18,7 +18,10 @@ if [ "${INTERACTIVE:-0}" -ne 1 ] ; then
     return
 fi
 SUBLIME_VERSION_PREF=3
-[[ -e ${HOME}/projects/dotfiles/bash/aliases ]] && . ${HOME}/projects/dotfiles/bash/aliases
+if [ -f $(brew --prefix)/etc/bash_completion ] ; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+# [[ -e ${HOME}/projects/dotfiles/bash/aliases ]] && . ${HOME}/projects/dotfiles/bash/aliases
 TZ="/usr/share/zoneinfo/EST5EDT"
 if [ "${env_type}" == "Darwin" ] ; then
     PATH=${HOME}/homebrew/bin:${HOME}/local/bin:${HOME}/bin:/opt/chefdk/embedded/bin:${HOME}/.chefdk/gem/ruby/2.1.0/bin:${PATH}
@@ -35,6 +38,7 @@ if [ -f /etc/bash_completion.d/git-prompt ] ; then
 fi
 GIT_PS1_SHOWDIRTYSTATE=true
 PS1='[\u@clam \W$(__git_ps1)]\$ '
+#PS1='[\u@clam \W$]\$ '
 LD_LIBRARY_PATH=${HOME}/local/lib:${LD_LIBRARY_PATH}
 export PATH
 export LD_LIBRARY_PATH

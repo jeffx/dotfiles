@@ -5,7 +5,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'jnurmine/Zenburn'
@@ -16,19 +16,23 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-surround'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'davidhalter/jedi-vim'
 
 "Put all plugins before this line
 call vundle#end()
 filetype plugin indent on
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_vim.sh')
+"  execfile(activate_this, dict(__file__=activate_this))
+"EOF
 let python_highlight_all=1
+"let g:ycm_path_to_python_interpreter='/usr/local/bin/python3'
+"let NERDTreeMapOpenInTab='<ENTER>'
 syntax enable
 set encoding=utf-8
 set number
@@ -47,6 +51,8 @@ set autowrite
 set ignorecase
 set smartcase
 set hlsearch
+set splitright
+set splitbelow
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
 nnoremap j gj
 nnoremap k gk
@@ -78,14 +84,16 @@ autocmd InsertLeave * call ToggleRelativeOn()
 
 
 
-"set background=dark
-colorscheme zenburn
+set background=dark
+"colorscheme zenburn
 call togglebg#map("<F5>")
 set foldmethod=indent
 set foldlevel=99
 highlight BadWhitespace ctermbg=red guibg=red
 noremap <space> za
 map <C-F> :NERDTreeToggle<CR>
+let g:virtualenv_directory='.'
+lef g:virtualenv_auto_activate=1
 let g:SimpylFold_docstring_preview=1
 let NERDTreeIgnore=['\.pyc$', '\~$']
 au BufNewFile,BufRead *.py 

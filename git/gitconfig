@@ -1,9 +1,10 @@
+# This is Git's per-user configuration file.
 [user]
-    name = Jeff Tillotson
-    email = jpt@jeffx.com
+    name = Jeffery Tillotson
+    email = jeffery.tillotson@etrade.com
 [core]
     excludesfile = ~/.gitignore
-    editor = /usr/bin/vim
+    editor = vim
 [color]
     branch = auto
     diff = auto
@@ -56,3 +57,10 @@
     sl = stash list
     sa = stash apply
     ss = stash save
+    dt = difftool
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[push]
+    default = simple
