@@ -1,4 +1,8 @@
 alias envcig="source ${HOME}/env/cigdev-admin-openrc.sh"
 alias envcia="source ${HOME}/env/ciadev-admin-openrc.sh"
 alias bh=delete_host_from_known_hosts
-alias ls="ls --color=auto -F"
+alias dockercleanc='docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null'
+alias dockercleani='docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null'
+alias dockercleanv='docker volume rm $(docker volume ls -qf dangling=true) 2>/dev/null'
+alias dockerclean="dockercleanc || true && dockercleani && dockercleanv"
+alias dockerenv=load_docker_machine

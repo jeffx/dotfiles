@@ -21,7 +21,8 @@ SUBLIME_VERSION_PREF=3
 if [ -f $(brew --prefix)/etc/bash_completion ] ; then
     . $(brew --prefix)/etc/bash_completion
 fi
-# [[ -e ${HOME}/projects/dotfiles/bash/aliases ]] && . ${HOME}/projects/dotfiles/bash/aliases
+[[ -e ${HOME}/projects/dotfiles/bash/aliases ]] && . ${HOME}/projects/dotfiles/bash/aliases
+[[ -e ${HOME}/projects/dotfiles/bash/functions ]] && . ${HOME}/projects/dotfiles/bash/functions
 TZ="/usr/share/zoneinfo/EST5EDT"
 if [ "${env_type}" == "Darwin" ] ; then
     PATH=${HOME}/homebrew/bin:${HOME}/local/bin:${HOME}/bin:/opt/chefdk/embedded/bin:${HOME}/.chefdk/gem/ruby/2.1.0/bin:${PATH}
@@ -37,8 +38,8 @@ if [ -f /etc/bash_completion.d/git-prompt ] ; then
     . /etc/bash_completion.d/git-prompt
 fi
 GIT_PS1_SHOWDIRTYSTATE=true
-PS1='[\u@clam \W$(__git_ps1)]\$ '
-#PS1='[\u@clam \W$]\$ '
+PS1='[\u@\h \W$(__git_ps1)]\$ '
+#PS1='[\u@\h \W$]\$ '
 LD_LIBRARY_PATH=${HOME}/local/lib:${LD_LIBRARY_PATH}
 export PATH
 export LD_LIBRARY_PATH
@@ -50,3 +51,4 @@ unset env_type
 KITCHEN_LOCAL_YAML=~/projects/dotfiles/environment/kitchen/kitchen.local.yml
 export KITCHEN_LOCAL_YAML
 export TERM=xterm-256color
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

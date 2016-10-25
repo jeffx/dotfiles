@@ -5,3 +5,12 @@ delete_host_from_known_hosts() {
         sed -i "${1}d" ${HOME}/.ssh/known_hosts
     fi
 }
+
+load_docker_machine() {
+    if [[ -z ${1} ]] ; then
+        env="default"
+    else
+        env=${1}
+    fi
+    eval $(docker-machine env ${env})
+}
